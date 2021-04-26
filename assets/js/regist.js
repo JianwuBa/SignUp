@@ -16,11 +16,19 @@
   //密码失去焦点
   $password.blur(function () {
     
-    console.log(checkPssword())
+    //先校验密码合法性在进行安全等级判断
+    if(checkPssword()){
+      if(checkPasswordLength() < 3){
+        //密码强度必须大于2
+        wranFun($password,"密码必须包含数字字母特殊符号中的两种")
+        $(".password-strong").remove(); 
+      }
+    }
   })
   //密码获取焦点
   $password.focus(function () {
     removeWran($(this))
+
   })
   //校验邮箱
   function checkEmail() {
@@ -45,7 +53,7 @@
       var password = $password.val()
       // [^  表示非的意思 
       var reg = /[^0-9a-zA-Z\`\!\@\#\$\%\^\&\*\(\)\_\-\+\=\{\}\.\,\;\:]/g
-      console.log(reg.test(password))
+      //console.log(reg.test(password))
       if(reg.test(password)){
         flag = false;
         console.log("错误")
@@ -54,7 +62,10 @@
       return flag;
   }
   $password.bind("input",function () {
-    checkPasswordLength();
+    $(".password-strong").remove(); 
+    if(checkPssword()){
+      checkPasswordLength();
+    }
   })
   //显示错误信息
   function wranFun(dom,value){
@@ -68,6 +79,8 @@
     dom.siblings(".help-block").remove();
   }
   function checkPasswordLength() {
+    $(".password-strong").remove(); 
+    removeWran($password)
     var password = $password.val()
     console.log(password)
     var leval = 0;
@@ -87,7 +100,6 @@
       leval ++
     } 
     console.log(leval)  
-    $(".password-strong").remove();  
     var dom = null;
     switch (leval) {
       case 5:
@@ -109,5 +121,6 @@
     if(dom){
       $password.after(dom)
     }
+    return leval;
   }
 })()
