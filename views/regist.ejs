@@ -20,6 +20,11 @@
   .regist .title {
     font-size: 24px;
   }
+
+  .password-strong {
+    margin-top: 10px;
+    padding: 0 20px;
+  }
 </style>
 
 <body>
@@ -65,8 +70,13 @@
 
       </div>
       <div class="form-group">
-        <label for="exampleInputPassword1">密码：</label>
+        <label for="exampleInputPassword1" class="control-label">密码：</label>
         <input type="password" class="form-control" id="password" placeholder="Password">
+        <!-- <p class="password-strong bg-primary">很强</p>
+        <p class="password-strong bg-success">强</p>
+        <p class="password-strong bg-info">一般</p>
+        <p class="password-strong bg-warning">弱</p>
+        <p class="password-strong bg-danger">很弱</p> -->
       </div>
       <div class="form-group">
         <label for="exampleInputPassword1">重复密码：</label>
