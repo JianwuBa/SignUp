@@ -91,7 +91,9 @@
       wranFun($inputEmail,"请输入合法邮箱");
       return;
     }
-    emailState = true;
+    //ajax请求校验
+    checkEmailAjax()
+    //emailState = true;
   }
   //校验密码
   function checkPssword() {
@@ -178,5 +180,18 @@
       $password.after(dom)
     }
     return leval;
+  }
+  //ajax 请求校验 邮箱
+  function checkEmailAjax() { 
+    $.ajax({
+      "type":"CHECKOUT",
+      "url":"/regist",
+      "data":{
+        "email":$inputEmail.val()
+      },
+      "success":function (data) {
+        console.log(data)
+      }
+    })
   }
 })()
