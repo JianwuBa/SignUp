@@ -80,7 +80,17 @@
       alert("请确认两次密码是否一致");
       return;
     }
-    alert(emailState && passwordState && repeadPasswordState)
+    // alert(emailState && passwordState && repeadPasswordState)
+    $.ajax({
+      "type":"POST",
+      "data":{
+        email:$inputEmail.val(),
+        password:$password.val()
+      },
+      "success":function (data) {
+        console.log(data)
+      }
+    })
   })
   //校验邮箱
   function checkEmail() {
@@ -93,7 +103,7 @@
     }
     //ajax请求校验
     checkEmailAjax()
-    //emailState = true;
+    emailState = true;
   }
   //校验密码
   function checkPssword() {
@@ -190,7 +200,12 @@
         "email":$inputEmail.val()
       },
       "success":function (data) {
-        console.log(data)
+        // console.log(data)
+        if(data.result > 0){
+          wranFun($inputEmail,"该邮箱已被注册");
+        }else{
+          emailState = true;
+        }
       }
     })
   }

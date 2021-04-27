@@ -7,16 +7,35 @@ exports.ShowRegist = function (req,res) {
 }
 //执行
 exports.doRegist = function (req,res) { 
-    console.log(req)
+    var form = new formidable.IncomingForm();
+    form.parse(req,function (err,fields,files) {  
+        console.log(fields)
+        var email = fields.email;
+        var password = fields.password;
+        User.count({"email":email},function(err,count){
+            // console.log(count)
+            if(count == 0){
+                User.create({
+                    "email":email,
+                    "password":password
+                },function(err){
+                    res.json({"result" : !err ? 1 : -1})
+                })
+            }else{
+                res.json({"result":-2})
+            }
+        })
+    })
 }
 //查询
 exports.checkRegist = function (req,res) {
     var form = new formidable.IncomingForm();
     form.parse(req,function (err,fields,files) {  
-        console.log(fields)
+        //console.log(fields)
         var email = fields.email;
-        User.count({"email":email},function (err,count) {
-            console.log(count)
+        User.count({"email":email},function(err,count){
+            // console.log(count)
+            res.json({"result":count})
         })
     })
 }
