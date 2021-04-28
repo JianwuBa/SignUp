@@ -89,6 +89,12 @@
       },
       "success":function (data) {
         console.log(data)
+        if(data.result == 1){
+          alert("注册成功！请登录");
+          window.location="/login";
+        }else if(data.result == -2){
+          wranFun($inputEmail,"该邮箱已被注册");
+        }
       }
     })
   })
@@ -200,7 +206,7 @@
         "email":$inputEmail.val()
       },
       "success":function (data) {
-        // console.log(data)
+        //console.log(data)
         if(data.result > 0){
           wranFun($inputEmail,"该邮箱已被注册");
         }else{
