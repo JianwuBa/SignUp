@@ -28,7 +28,6 @@ mongoose.connect("mongodb://localhost:27017/signup",{useNewUrlParser: true,useUn
 
 //链接需要的 model 
 // var Account = require("./models/User")
-//首页
 
 //开辟路径  注册 regist
 app.get("/regist",registctrl.ShowRegist)
